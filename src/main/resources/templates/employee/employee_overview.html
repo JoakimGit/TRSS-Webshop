@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragments/header"></div>
+    <title>Medarbejder oversigt</title>
+</head>
+<body>
+<div th:replace="/fragments/navbar"></div>
+
+<div class="container">
+    <h1>Liste over medarbejdere</h1><br>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Navn</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Ansættelsesdato</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.employee_id}"></td>
+            <td th:text="${employee.firstName + ' ' + employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phoneNumber}"></td>
+            <td th:text="${employee.hireDate}"></td>
+            <td>
+                <a th:href="@{'/rediger/medarbejder/' + ${employee.employee_id}}"><button type="button" class="btn btn-success">Rediger</button></a>
+                <a th:href="@{'/slet/medarbejder/' + ${employee.employee_id}}" onclick="return confirm('Er du sikker på at du vil slette denne medarbejder?');"><button type="button" class="btn btn-danger">Slet</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/bottom"></div>
+</body>
+</html>

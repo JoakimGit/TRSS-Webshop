@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragments/header"></div>
+    <title>Opret medarbejder</title>
+</head>
+<body>
+<div th:replace="/fragments/navbar"></div>
+
+<div class="container">
+    <br>
+    <h1>Opret ny medarbejder</h1>
+    <br>
+    <form action="/rediger/medarbejder" method="post">
+        <input type="hidden" name="employee_id" th:value="${employee.employee_id}">
+        <div class="form-group">
+            <label for="fname"><b>Fornavn</b></label>
+            <input type="text" class="form-control" id="fname" name="firstName" th:value="${employee.firstName}">
+        </div>
+        <div class="form-group">
+            <label for="lname"><b>Efternavn</b></label>
+            <input type="text" class="form-control" id="lname" name="lastName" th:value="${employee.lastName}">
+        </div>
+        <div class="form-group">
+            <label for="email"><b>Email</b></label>
+            <input type="text" class="form-control" id="email" name="email" th:value="${employee.email}">
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber"><b>Tlf. Nummer</b></label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${employee.phoneNumber}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Opdater</button>
+    </form>
+</div>
+
+</body>
+</html>

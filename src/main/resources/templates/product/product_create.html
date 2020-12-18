@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragments/header"></div>
+    <title>Opret produkt</title>
+</head>
+<body>
+<div th:replace="/fragments/navbar"></div>
+
+<div class="container">
+    <br>
+    <h1>Opret nyt produkt</h1>
+    <br>
+    <form action="/produkt" method="post">
+        <div class="form-group">
+            <label for="name"><b>Navn</b></label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Indtast navn på produkt">
+        </div>
+        <div class="form-group">
+            <label for="description"><b>Beskrivelse</b></label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Indtast beskrivelse på produkt">
+        </div>
+        <div class="form-group">
+            <label for="price"><b>Pris</b></label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="Indtast pris på produkt">
+        </div>
+        <div class="form-group">
+            <label for="category"><b>Kategori</b></label>
+            <input type="text" class="form-control" id="category" name="category" placeholder="Indtast kategori på produkt">
+        </div>
+        <div class="form-group">
+            <label for="quantity"><b>Antal</b></label>
+            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Indtast antal af produkt">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Opret</button>
+    </form>
+</div>
+
+</body>
+</html>
