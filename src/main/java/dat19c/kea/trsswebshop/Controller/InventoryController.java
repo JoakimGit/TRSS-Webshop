@@ -21,7 +21,7 @@ public class InventoryController {
         return "/inventory/inventory_overview";
     }
 
-    @PostMapping("/inventory/addExtra")
+    @PostMapping("/lager/tilfoej")
     public String addExtraInventory(WebRequest request) {
         Long productID = Long.valueOf(request.getParameter("product_id"));
         int amount = Integer.parseInt(request.getParameter("amount"));

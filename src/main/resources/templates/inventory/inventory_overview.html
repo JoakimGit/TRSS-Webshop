@@ -26,7 +26,7 @@
             <td th:text="${inventoryRow.quantity}"></td>
             <td th:text="${inventoryRow.status}"></td>
             <td>
-                <form action="/inventory/addExtra" method="post">
+                <form action="/lager/tilfoej" method="post">
                     <label for="increaseInventory"></label>
                     <input type="hidden" name="product_id" th:value="${inventoryRow.inventory_id}">
                     <input type="number" class="form-control" id="increaseInventory" name="amount">

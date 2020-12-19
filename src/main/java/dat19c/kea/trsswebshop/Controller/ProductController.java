@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Scope("request")
@@ -27,23 +24,28 @@ public class ProductController {
     @Autowired
     Cart cart;
 
-    @GetMapping("/produkter")
+    @GetMapping("/produkter/oversigt")
     public String showProduct(Model model) {
         model.addAttribute("products", productService.findProducts());
         return "/product/product_overview";
     }
 
-    @GetMapping("/produkt")
+    @GetMapping("/produkter")
+    public String showProductByCategory(@RequestParam String category, Model model) {
+        model.addAttribute("products", productService.findByCategory(category));
+        return "/product/product_overview_category";
+    }
+
+    @GetMapping("/produkt/opret")
     public String createProduct() {
         return "/product/product_create";
     }
 
-    @PostMapping("/produkt")
+    @PostMapping("/produkt/opret")
     public String createProduct(@ModelAttribute Product product, @ModelAttribute Inventory inventory) {
         inventory.calculateStatus();
         inventory.setProduct(product);
         inventoryService.save(inventory);
-        //productService.save(product);
         return "redirect:/produkter";
     }
 
@@ -72,11 +74,11 @@ public class ProductController {
         return "/cart";
     }
 
-    @GetMapping("/addToCart/{id}")
-    public String addToCart(@PathVariable ("id") Long id) {
+    @GetMapping("/addToCart/{id}/{category}")
+    public String addToCart(@PathVariable ("id") Long id, @PathVariable("category") String category) {
         Product product = productService.findById(id);
         cart.addToCard(product);
-        return "redirect:/produkter";
+        return "redirect:/cart";
     }
 
     @GetMapping("/removeFromCart/{id}")

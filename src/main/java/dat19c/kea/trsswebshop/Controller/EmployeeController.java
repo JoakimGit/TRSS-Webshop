@@ -1,8 +1,8 @@
 package dat19c.kea.trsswebshop.Controller;
 
-import dat19c.kea.trsswebshop.Model.Customer;
 import dat19c.kea.trsswebshop.Model.Employee;
 import dat19c.kea.trsswebshop.Service.EmployeeService;
+import dat19c.kea.trsswebshop.Utils.HelperMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 @Controller
 public class EmployeeController {
@@ -28,17 +23,14 @@ public class EmployeeController {
         return "/employee/employee_overview";
     }
 
-    @GetMapping("/medarbejder")
+    @GetMapping("/medarbejder/opret")
     public String createEmployee() {
         return "/employee/employee_create";
     }
 
-    @PostMapping("/medarbejder")
+    @PostMapping("/medarbejder/opret")
     public String createEmployee(@ModelAttribute Employee employee) {
-        LocalDateTime currentDate = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String today = currentDate.format(formatter);
-        employee.setHireDate(today);
+        employee.setHireDate(HelperMethods.getCurrentDate());
         employeeService.save(employee);
         return "redirect:/medarbejdere";
     }

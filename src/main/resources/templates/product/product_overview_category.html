@@ -12,30 +12,23 @@
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Navn</th>
             <th scope="col">Beskrivelse</th>
             <th scope="col">Pris</th>
-            <th scope="col">Kategori</th>
-            <th scope="col" style="width: 225px"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
-            <td th:text="${product.product_id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
-            <td th:text="${product.category}"></td>
             <td>
-                <a th:href="@{'/addToCart/' + ${product.product_id}}"><button type="button" class="btn btn-primary">Tilføj</button></a>
-                <a th:href="@{'/rediger/produkt/' + ${product.product_id}}"><button type="button" class="btn btn-success">Rediger</button></a>
-                <a th:href="@{'/slet/produkt/' + ${product.product_id}}" onclick="return confirm('Er du sikker på at du vil slette dette produkt?');"><button type="button" class="btn btn-danger">Slet</button></a>
+                <a th:href="@{'/addToCart/' + ${product.product_id} + '/' + ${product.category}}"><button type="button" class="btn btn-primary">Tilføj</button></a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="/produkt/opret"><button type="button" class="btn btn-success">Opret nyt produkt</button></a>
 </div>
 
 <div th:replace="fragments/bottom"></div>

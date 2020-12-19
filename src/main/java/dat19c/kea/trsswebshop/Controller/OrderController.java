@@ -3,16 +3,12 @@ package dat19c.kea.trsswebshop.Controller;
 import dat19c.kea.trsswebshop.Model.*;
 import dat19c.kea.trsswebshop.Service.CustomerService;
 import dat19c.kea.trsswebshop.Service.OrderService;
+import dat19c.kea.trsswebshop.Utils.HelperMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @Scope("request")
@@ -33,24 +29,13 @@ public class OrderController {
         return "/order/order_overview";
     }
 
-    @GetMapping("/opretOrdre")
+    @GetMapping("/ordre/opret")
     public String createOrder() {
-        Order order = new Order();
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
+        String username = HelperMethods.getLoggedUsername();
         Customer customer = customerService.findByUsername(username);
 
-        LocalDateTime currentDate = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String today = currentDate.format(formatter);
-
-        order.setDateTime(today);
+        Order order = new Order();
+        order.setDateTime(HelperMethods.getCurrentDate());
         order.setTotalPrice(cart.getTotalPrice());
         order.setStatus("Afventer");
         order.setCustomer(customer);
@@ -61,6 +46,9 @@ public class OrderController {
         }
         
         orderService.save(order);
+        cart.clearCart();
         return "redirect:/ordre";
     }
+
+
 }

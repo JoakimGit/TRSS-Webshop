@@ -22,12 +22,12 @@ public class CustomerController {
         return "/customer/customer_overview";
     }
 
-    @GetMapping("/kunde")
+    @GetMapping("/kunde/opret")
     public String createCustomer() {
         return "/customer/customer_create";
     }
 
-    @PostMapping("/kunde")
+    @PostMapping("/kunde/opret")
     public String createCustomer(@ModelAttribute Customer customer) {
         customerService.save(customer);
         return "redirect:/kunder";

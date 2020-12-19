@@ -31,6 +31,10 @@ public class Cart {
         }
     }
 
+    public void clearCart() {
+        products.clear();
+    }
+
     public List<Product> getProducts() {
         return products;
     }
