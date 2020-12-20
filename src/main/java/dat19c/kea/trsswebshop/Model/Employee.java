@@ -13,6 +13,7 @@ public class Employee {
     private Long employee_id;
     private String firstName;
     private String lastName;
+    private String username;
     private String email;
     private String phoneNumber;
     private String hireDate;
@@ -42,6 +43,14 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -74,9 +83,10 @@ public class Employee {
                 "employee_id=" + employee_id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", hireDate=" + hireDate +
+                ", hireDate='" + hireDate + '\'' +
                 '}';
     }
 }
