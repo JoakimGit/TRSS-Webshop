@@ -23,9 +23,11 @@ public class OrderController {
     @Autowired
     Cart cart;
 
-    @GetMapping("/ordre")
+    @GetMapping("/mine-ordre")
     public String showOrders(Model model) {
-        model.addAttribute("orders", orderService.findOrders());
+        String username = HelperMethods.getLoggedUsername();
+        Customer customer = customerService.findByUsername(username);
+        model.addAttribute("orders", orderService.findByCustomer(customer));
         return "/order/order_overview";
     }
 
@@ -47,7 +49,7 @@ public class OrderController {
         
         orderService.save(order);
         cart.clearCart();
-        return "redirect:/ordre";
+        return "redirect:/mine-ordre";
     }
 
 

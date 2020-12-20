@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -30,27 +29,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-                //.authorizeRequests()
-                //    .antMatchers("/lager/**").permitAll();
-
-                /*    .and()
+        http.csrf().disable()
+                .authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/index", false)
-                    .and()
-                .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .and()
-                .exceptionHandling()
-                    .accessDeniedPage("/adgang-nægtet");*/
+                .and()
+                .logout();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
-                .ignoring()
-                .antMatchers("/h2-console/**");
+            .ignoring()
+            .antMatchers("/h2-console/**");
     }
 
     @Bean

@@ -8,7 +8,6 @@
 <div th:replace="/fragments/navbar"></div>
 
 <div class="container">
-    <h1>Liste over vores produkter</h1><br>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -28,7 +27,7 @@
             <td th:text="${product.price}"></td>
             <td th:text="${product.category}"></td>
             <td>
-                <a th:href="@{'/addToCart/' + ${product.product_id}}"><button type="button" class="btn btn-primary">Tilføj</button></a>
+                <a th:href="@{'/addToCart/' + ${product.product_id}}"><button type="button" class="btn btn-primary">Køb</button></a>
                 <a th:href="@{'/rediger/produkt/' + ${product.product_id}}"><button type="button" class="btn btn-success">Rediger</button></a>
                 <a th:href="@{'/slet/produkt/' + ${product.product_id}}" onclick="return confirm('Er du sikker på at du vil slette dette produkt?');"><button type="button" class="btn btn-danger">Slet</button></a>
             </td>

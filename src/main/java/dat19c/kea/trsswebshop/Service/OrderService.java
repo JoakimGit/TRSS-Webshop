@@ -1,5 +1,6 @@
 package dat19c.kea.trsswebshop.Service;
 
+import dat19c.kea.trsswebshop.Model.Customer;
 import dat19c.kea.trsswebshop.Model.Order;
 import dat19c.kea.trsswebshop.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class OrderService {
             throw new RuntimeException();
         }
         return order.get();
+    }
+
+    public List<Order> findByCustomer(Customer customer) {
+        return orderRepository.findByCustomer(customer);
     }
 
     public void save(Order order) {

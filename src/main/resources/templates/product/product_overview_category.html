@@ -24,7 +24,7 @@
             <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
             <td>
-                <a th:href="@{'/addToCart/' + ${product.product_id} + '/' + ${product.category}}"><button type="button" class="btn btn-primary">Tilføj</button></a>
+                <a th:href="@{'/addToCart/' + ${product.product_id} + '/' + ${product.category}}"><button type="button" class="btn btn-primary">Køb</button></a>
             </td>
         </tr>
         </tbody>
